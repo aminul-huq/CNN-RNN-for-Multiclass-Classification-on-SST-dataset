@@ -1,3 +1,4 @@
+import os
 import torch
 from torchtext import data
 from torchtext import datasets
@@ -9,7 +10,7 @@ def get_SSTdata():
     LABEL = data.LabelField()
 
     train_data,valid_data, test_data = datasets.SST.splits(TEXT, LABEL, fine_grained=False)
-    MAX_VOCAB_SIZE = 25_000
+    MAX_VOCAB_SIZE = 25000
 
     TEXT.build_vocab(train_data, 
                      max_size = MAX_VOCAB_SIZE, 
@@ -166,35 +167,38 @@ def test(model,test_loader,criterion,device):
         print("Testing: Loss: [{:.2f}] Accuracy [{:.2f}]".format(total_loss/len(test_loader),total_correct*100/total_data))
 
         
-def visualize_train(history):
+def visualize_train_loss(history):        
     plt.plot(history['train_loss'])
     plt.xlabel("Number of iteration")
     plt.ylabel("Loss")
     plt.title("Loss vs Number of iteration")
+    plt.savefig("Training_loss")
     plt.show()
 
-    # visualization accuracy 
+def visualize_train_acc(history):
     plt.plot(history['train_acc'],color = "red")
     plt.xlabel("Number of iteration")
     plt.ylabel("Accuracy")
     plt.title("Accuracy vs Number of iteration")
+    plt.savefig("Training_Acc")
     plt.show()
 
-
-def visualize_eval(history):
+    
+def visualize_eval_loss(history):
     plt.plot(history['val_loss'])
     plt.xlabel("Number of iteration")
     plt.ylabel("Loss")
     plt.title("Loss vs Number of iteration")
+    plt.savefig("Validation_loss")
     plt.show()
 
-    # visualization accuracy 
+def visualize_eval_acc(history):
     plt.plot(history['val_acc'],color = "red")
     plt.xlabel("Number of iteration")
     plt.ylabel("Accuracy")
     plt.title("Accuracy vs Number of iteration")
+    plt.savefig("Validation_Acc")
     plt.show()
-
 
 
 

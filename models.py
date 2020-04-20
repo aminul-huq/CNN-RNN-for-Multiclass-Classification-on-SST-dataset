@@ -51,10 +51,7 @@ class CNN(nn.Module):
         embedded = embedded.unsqueeze(1)
         conved = F.relu(self.convs(embedded)).squeeze(3)
         pooled = F.max_pool1d(conved, conved.shape[2]).squeeze(2)
-        if self.d > 0 :
-                cat = self.dropout(pooled)
-                return self.fc(cat)
-        else : 
-                return self.fc(pooled)
+        cat = self.dropout(pooled)
+        return self.fc(cat)
     
  

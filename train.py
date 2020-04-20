@@ -55,3 +55,8 @@ if __name__ == '__main__':
 
     history = train_eval(model, train_iterator, valid_iterator, num_epochs, optimizer, criterion, device)
     test(model,test_iterator,criterion,device)
+    
+    visualize_train_loss(history)
+    visualize_train_acc(history)
+    visualize_eval_loss(history)
+    visualize_eval_acc(history)
